@@ -1,8 +1,4 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public class PlayerLocomotion : MonoBehaviour
 {
@@ -42,6 +38,7 @@ public class PlayerLocomotion : MonoBehaviour
         _moveDirection = _cameraObject.forward * _inputHandler.Vertical;
         _moveDirection += _cameraObject.right * _inputHandler.Horizontal;
         _moveDirection.Normalize();
+        _moveDirection.y = 0;
 
         float speed = _movementSpeed;
         _moveDirection *= speed;

@@ -1,5 +1,5 @@
+using System;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public class InputHandler : MonoBehaviour
 {
@@ -10,9 +10,26 @@ public class InputHandler : MonoBehaviour
     public float MouseY;
 
     private PlayerControls _inputActions;
+    private CameraHandler _cameraHandler;
 
     private Vector2 _movementInput;
     private Vector2 _cameraInput;
+
+    private void Awake()
+    {
+        _cameraHandler = CameraHandler.Singleton;
+    }
+
+    private void FixedUpdate()
+    {
+        float delta = Time.fixedDeltaTime;
+
+        if (_cameraHandler is not null)
+        {
+            _cameraHandler.FollowTarget(delta);
+            _cameraHandler.HandleCameraRotation(delta, MouseX, MouseY);
+        }
+    }
 
     public void OnEnable()
     {
